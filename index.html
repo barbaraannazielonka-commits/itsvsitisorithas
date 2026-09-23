@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Its vs. It's: The Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE2;
+    --paper-dark: #E4DFD2;
+    --ink: #23241F;
+    --ink-soft: #55564C;
+    --rule: #C9C2AE;
+    --red: #A6392C;
+    --green: #3F6B4E;
+    --gold: #C79A3D;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1E1D19;
+      --paper-dark: #262420;
+      --ink: #EDE8DC;
+      --ink-soft: #B6AF9E;
+      --rule: #47443A;
+      --red: #E07A64;
+      --green: #7FBF97;
+      --gold: #D9B25C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1E1D19;
+    --paper-dark: #262420;
+    --ink: #EDE8DC;
+    --ink-soft: #B6AF9E;
+    --rule: #47443A;
+    --red: #E07A64;
+    --green: #7FBF97;
+    --gold: #D9B25C;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: auto; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+  header.hero {
+    margin-bottom: 40px;
+  }
+  .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(32px, 6vw, 46px);
+    font-weight: 700;
+    margin: 0 0 6px;
+    line-height: 1.1;
+  }
+  h1 .its { color: var(--red); }
+  h1 .it-s { color: var(--green); }
+  .sub {
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 54ch;
+  }
+  .rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 36px 0;
+  }
+  section.explain {
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 26px 28px;
+    margin-bottom: 44px;
+  }
+  section.explain h2 {
+    font-size: 20px;
+    margin: 0 0 14px;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 18px 0;
+  }
+  @media (max-width: 520px) {
+    .pair { grid-template-columns: 1fr; }
+  }
+  .card {
+    border-left: 3px solid var(--rule);
+    padding: 4px 0 4px 14px;
+  }
+  .card.its { border-color: var(--green); }
+  .card.it-s { border-color: var(--red); }
+  .card .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .card.its .label { color: var(--green); }
+  .card.it-s .label { color: var(--red); }
+  .card p { margin: 6px 0 0; font-size: 15px; color: var(--ink-soft); }
+  .trick {
+    margin-top: 18px;
+    font-size: 15px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule);
+  }
+  .trick strong { color: var(--ink); }
+
+  section.quiz h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .quiz-sub { color: var(--ink-soft); font-size: 15px; margin: 0 0 28px; }
+
+  .q {
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .q:first-of-type { border-top: none; }
+  .q-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .q-text {
+    font-size: 19px;
+    margin: 0 0 16px;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 68px;
+    border-bottom: 2px solid var(--ink);
+    text-align: center;
+    font-weight: 600;
+  }
+  .choices { display: flex; gap: 12px; flex-wrap: wrap; }
+  .choice {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 15px;
+    padding: 9px 18px;
+    background: transparent;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .choice:hover { border-color: var(--ink-soft); }
+  .choice.selected {
+    border-color: var(--ink);
+    background: var(--paper-dark);
+  }
+  .choice:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .feedback {
+    margin-top: 12px;
+    font-size: 14.5px;
+    display: none;
+    padding: 10px 12px;
+    border-radius: 3px;
+  }
+  .q.correct .feedback {
+    display: block;
+    color: var(--green);
+    background: color-mix(in srgb, var(--green) 12%, transparent);
+  }
+  .q.incorrect .feedback {
+    display: block;
+    color: var(--red);
+    background: color-mix(in srgb, var(--red) 12%, transparent);
+  }
+
+  .submit-row {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  button.submit {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 26px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  button.submit:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.submit:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .hint {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .result {
+    margin-top: 30px;
+    padding: 22px 26px;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    display: none;
+  }
+  .result.show { display: block; }
+  .result .score {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .result p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  section.passage h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .passage-sub { color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  .passage-text {
+    font-size: 18px;
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 26px 28px;
+  }
+  select.pselect {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 2px 6px;
+    margin: 0 2px;
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    border-bottom: 2px solid var(--ink);
+    border-radius: 0;
+    cursor: pointer;
+  }
+  select.pselect:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  select.pselect.correct { border-bottom-color: var(--green); color: var(--green); }
+  select.pselect.incorrect { border-bottom-color: var(--red); color: var(--red); }
+  .passage-key {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    display: none;
+  }
+  .passage-key.show { display: block; }
+  .passage-key ol { margin: 8px 0 0; padding-left: 20px; }
+  .passage-key li { margin-bottom: 6px; }
+
+  section.errors h2 { font-size: 22px; margin-bottom: 4px; }
+  .errors-sub { color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  .errors-text {
+    font-size: 18px;
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 26px 28px;
+  }
+  .flagword {
+    cursor: pointer;
+    border-bottom: 2px dotted var(--ink-soft);
+    padding: 0 2px;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+  .flagword:hover { background: var(--paper); }
+  .flagword.flagged {
+    background: var(--gold);
+    border-bottom: 2px solid var(--gold);
+  }
+  .flagword.tp { background: color-mix(in srgb, var(--green) 25%, transparent); border-bottom-color: var(--green); }
+  .flagword.fp { background: color-mix(in srgb, var(--red) 25%, transparent); border-bottom-color: var(--red); }
+  .flagword.fn { background: transparent; border-bottom: 2px solid var(--red); }
+  .flagword.tn { background: transparent; border-bottom: 2px dotted var(--rule); }
+  .fix-note {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--red);
+    vertical-align: super;
+    margin-left: 1px;
+  }
+  .errors-key { margin-top: 18px; font-size: 14px; color: var(--ink-soft); display: none; }
+  .errors-key.show { display: block; }
+  .errors-key ol { margin: 8px 0 0; padding-left: 20px; }
+  .errors-key li { margin-bottom: 6px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink-soft); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+
+  section.final {
+    display: none;
+    margin-top: 8px;
+  }
+  section.final.show { display: block; }
+  .final-card {
+    border: 2px solid var(--ink);
+    border-radius: 2px;
+    padding: 30px 30px;
+    text-align: center;
+    background: var(--paper-dark);
+  }
+  .final-kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+    margin: 0 0 10px;
+  }
+  .final-score {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-size: 52px;
+    margin: 0 0 6px;
+    line-height: 1;
+  }
+  .final-pct { color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; }
+  .final-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    text-align: left;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+  @media (max-width: 520px) { .final-breakdown { grid-template-columns: 1fr; } }
+  .final-breakdown div { border-top: 1px solid var(--rule); padding-top: 10px; }
+  .final-breakdown .n { font-size: 20px; font-weight: 700; display: block; }
+  .final-verdict { font-size: 16px; margin: 0; }
+
+  .progress-note {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 8px;
+  }
+  .progress-note.show { display: block; }
+  .progress-note:not(.show) { display: none; }
+
+  .footer-credit {
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1><span class="its">Its</span> or <span class="it-s">It's</span>?</h1>
+    <p class="sub">The single most common typo in English writing, explained in under a minute, then three tasks to prove you've got it.</p>
+  </header>
+
+  <section class="explain">
+    <h2>The rule, actually</h2>
+    <div class="pair">
+      <div class="card it-s">
+        <div class="label">it's</div>
+        <p>A contraction. It only ever means <em>it is</em> or <em>it has</em>. The apostrophe stands in for missing letters — same job it does in "don't" or "can't."</p>
+      </div>
+      <div class="card its">
+        <div class="label">its</div>
+        <p>A possessive pronoun, like <em>his</em>, <em>hers</em>, or <em>theirs</em>. None of those take an apostrophe either — so "its" doesn't, even though it feels like it should.</p>
+      </div>
+    </div>
+    <div class="trick">
+      <strong>The test:</strong> say the sentence with "it is" swapped in. If it still makes sense, you want <em>it's</em>. If it sounds absurd, you want <em>its</em>. ("The dog wagged it is tail" — nope. So: "its tail.")
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="quiz">
+    <h2>Now test yourself</h2>
+    <p class="quiz-sub">Pick the correct word for each blank, then check your score at the bottom.</p>
+
+    <div id="questions"></div>
+
+    <div class="submit-row">
+      <button class="submit" id="submitBtn" disabled>Check my answers</button>
+      <span class="hint" id="progressHint">0 / 7 answered</span>
+    </div>
+
+    <div class="result" id="result">
+      <p class="score" id="scoreText"></p>
+      <p id="scoreNote"></p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="passage">
+    <h2>One more task: fix it in context</h2>
+    <p class="passage-sub">Real writing rarely comes in single sentences. Read the passage below on teen health and choose the correct word for each of the 8 blanks.</p>
+
+    <div class="passage-text" id="passageText"></div>
+
+    <div class="submit-row">
+      <button class="submit" id="passageBtn" disabled>Check the passage</button>
+      <span class="hint" id="passageHint">0 / 8 answered</span>
+    </div>
+
+    <div class="result" id="passageResult">
+      <p class="score" id="passageScoreText"></p>
+      <p id="passageScoreNote"></p>
+      <div class="passage-key" id="passageKey"></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="errors">
+    <h2>Last task: spot the mistakes</h2>
+    <p class="errors-sub"><strong>10 words below are underlined. 5 are correct and 5 are mistakes.</strong> Click <u>only</u> the words that are wrong &mdash; leave the correct ones alone. Then check your answers.</p>
+
+    <div class="errors-text" id="errorsText"></div>
+
+    <div class="submit-row">
+      <button class="submit" id="errorsBtn">Check my answers</button>
+      <span class="hint" id="errorsHint">0 words flagged as incorrect</span>
+    </div>
+
+    <div class="result" id="errorsResult">
+      <p class="score" id="errorsScoreText"></p>
+      <p id="errorsScoreNote"></p>
+      <div class="legend">
+        <span><i class="swatch" style="background: color-mix(in srgb, var(--green) 25%, transparent); border: 1px solid var(--green);"></i> mistake you caught</span>
+        <span><i class="swatch" style="background: transparent; border-bottom: 2px solid var(--red);"></i> mistake you missed</span>
+        <span><i class="swatch" style="background: color-mix(in srgb, var(--red) 25%, transparent); border: 1px solid var(--red);"></i> flagged, but it was fine</span>
+      </div>
+      <div class="errors-key" id="errorsKey"></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <p class="progress-note show" id="progressNote">Complete all three tasks above to see your final score.</p>
+
+  <section class="final" id="finalSection">
+    <p class="final-kicker">final result</p>
+    <div class="final-card">
+      <p class="final-score" id="finalScore">0 / 25</p>
+      <p class="final-pct" id="finalPct"></p>
+      <div class="final-breakdown">
+        <div>Sentences<span class="n" id="finalQuiz">—</span></div>
+        <div>Passage<span class="n" id="finalPassage">—</span></div>
+        <div>Spot the errors<span class="n" id="finalErrors">—</span></div>
+      </div>
+      <p class="final-verdict" id="finalVerdict"></p>
+    </div>
+  </section>
+
+  <p class="footer-credit">Nannestad High School<br>Barbara Anna Zielonka</p>
+
+</div>
+
+<script>
+const TOTALS = { quiz: 7, passage: 8, errors: 10 };
+const finalScores = { quiz: null, passage: null, errors: null };
+
+function updateFinalSummary() {
+  const done = Object.values(finalScores).every(v => v !== null);
+  const finalSection = document.getElementById('finalSection');
+  const progressNote = document.getElementById('progressNote');
+  if (!done) {
+    const doneCount = Object.values(finalScores).filter(v => v !== null).length;
+    progressNote.textContent = `${doneCount} / 3 tasks complete \u2014 finish the rest to see your final score.`;
+    return;
+  }
+  const total = finalScores.quiz + finalScores.passage + finalScores.errors;
+  const totalPossible = TOTALS.quiz + TOTALS.passage + TOTALS.errors;
+  const pct = Math.round((total / totalPossible) * 100);
+
+  document.getElementById('finalQuiz').textContent = `${finalScores.quiz} / ${TOTALS.quiz}`;
+  document.getElementById('finalPassage').textContent = `${finalScores.passage} / ${TOTALS.passage}`;
+  document.getElementById('finalErrors').textContent = `${finalScores.errors} / ${TOTALS.errors}`;
+  document.getElementById('finalScore').textContent = `${total} / ${totalPossible}`;
+  document.getElementById('finalPct').textContent = `${pct}% overall`;
+
+  const verdict = document.getElementById('finalVerdict');
+  verdict.textContent = pct === 100
+    ? "Flawless. You've fully earned the right to correct other people's signage."
+    : pct >= 80
+    ? "Strong work \u2014 you clearly know the rule. Revisit whatever you missed above."
+    : pct >= 60
+    ? "You've got the basics, but scroll back up and reread the ones you got wrong."
+    : "Worth a second pass \u2014 start with the explanation at the top and try again.";
+
+  progressNote.classList.remove('show');
+  finalSection.classList.add('show');
+  finalSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+const QUESTIONS = [
+  {
+    before: "",
+    after: "raining outside, so grab an umbrella before you go.",
+    answer: "it's",
+    capFirst: true,
+    explain: "\u201cIt is raining\u201d works fine, so it's the contraction. And since it opens the sentence, it's capitalized: \u201cIt's.\u201d"
+  },
+  {
+    before: "The dog buried",
+    after: "favorite bone in the backyard again.",
+    answer: "its",
+    explain: "The bone belongs to the dog \u2014 that's possession, so no apostrophe."
+  },
+  {
+    before: "",
+    after: "been almost a year since we last spoke.",
+    answer: "it's",
+    capFirst: true,
+    explain: "This is \u201cit has been,\u201d the other contraction hiding behind it's \u2014 capitalized here since it starts the sentence."
+  },
+  {
+    before: "The company just announced",
+    after: "quarterly earnings.",
+    answer: "its",
+    explain: "The earnings belong to the company \u2014 possessive, no apostrophe."
+  },
+  {
+    before: "Look at that cat \u2014",
+    after: "tail is enormous!",
+    answer: "its",
+    explain: "The tail belongs to the cat. Swap in \u201cit is tail\u201d and it falls apart."
+  },
+  {
+    before: "Honestly, I think",
+    after: "going to be a great year for the team.",
+    answer: "it's",
+    explain: "\u201cI think it is going to be a great year\u201d reads perfectly \u2014 contraction. It's mid-sentence here, so no capital needed."
+  },
+  {
+    before: "The museum changed",
+    after: "opening hours for the holidays.",
+    answer: "its",
+    explain: "The hours belong to the museum. Possessive, no apostrophe."
+  }
+];
+
+const container = document.getElementById('questions');
+const submitBtn = document.getElementById('submitBtn');
+const progressHint = document.getElementById('progressHint');
+const result = document.getElementById('result');
+const scoreText = document.getElementById('scoreText');
+const scoreNote = document.getElementById('scoreNote');
+
+const state = new Array(QUESTIONS.length).fill(null);
+
+QUESTIONS.forEach((q, i) => {
+  const div = document.createElement('div');
+  div.className = 'q';
+  div.id = 'q' + i;
+  div.innerHTML = `
+    <div class="q-num">Question ${i + 1} of ${QUESTIONS.length}</div>
+    <p class="q-text">${q.before ? q.before + ' ' : ''}<span class="blank" id="blank${i}">___</span> ${q.after}</p>
+    <div class="choices">
+      <button class="choice" data-word="its" data-i="${i}">its</button>
+      <button class="choice" data-word="it's" data-i="${i}">it's</button>
+    </div>
+    <div class="feedback" id="fb${i}"></div>
+  `;
+  container.appendChild(div);
+});
+
+container.addEventListener('click', (e) => {
+  const btn = e.target.closest('.choice');
+  if (!btn) return;
+  const i = Number(btn.dataset.i);
+  const word = btn.dataset.word;
+  state[i] = word;
+
+  const qDiv = document.getElementById('q' + i);
+  qDiv.querySelectorAll('.choice').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const display = QUESTIONS[i].capFirst ? word.charAt(0).toUpperCase() + word.slice(1) : word;
+  document.getElementById('blank' + i).textContent = display;
+
+  const answered = state.filter(s => s !== null).length;
+  progressHint.textContent = `${answered} / ${QUESTIONS.length} answered`;
+  submitBtn.disabled = answered !== QUESTIONS.length;
+});
+
+submitBtn.addEventListener('click', () => {
+  let score = 0;
+  QUESTIONS.forEach((q, i) => {
+    const qDiv = document.getElementById('q' + i);
+    const fb = document.getElementById('fb' + i);
+    const correct = state[i] === q.answer;
+    qDiv.classList.remove('correct', 'incorrect');
+    qDiv.classList.add(correct ? 'correct' : 'incorrect');
+    const displayAnswer = q.capFirst ? q.answer.charAt(0).toUpperCase() + q.answer.slice(1) : q.answer;
+    if (correct) {
+      score++;
+      fb.textContent = 'Correct \u2014 ' + q.explain;
+    } else {
+      fb.textContent = `Not quite \u2014 the answer is "${displayAnswer}." ${q.explain}`;
+    }
+  });
+
+  scoreText.textContent = `${score} / ${QUESTIONS.length}`;
+  scoreNote.textContent = score === QUESTIONS.length
+    ? "Perfect. You've officially earned the right to correct other people's signage."
+    : score >= QUESTIONS.length - 2
+    ? "Solid. Reread the explanations above for the ones you missed."
+    : "Worth another pass \u2014 scroll back up to the rule and try again.";
+  result.classList.add('show');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  submitBtn.textContent = 'Check my answers again';
+  finalScores.quiz = score;
+  updateFinalSummary();
+});
+
+// --- Reading passage task ---
+const PASSAGE_ANSWERS = ["it's", "its", "it's", "its", "it's", "its", "it's", "its"];
+const PASSAGE_CAP_FIRST = [false, false, false, false, false, false, true, false];
+const PASSAGE_EXPLAIN = [
+  "\u201cDoctors say it is rare\u2026\u201d \u2014 the contraction fits.",
+  "The pull belongs to the habit \u2014 possessive, no apostrophe.",
+  "\u201cIt is fair to say\u2026\u201d \u2014 contraction.",
+  "The menus belong to the school \u2014 possessive.",
+  "\u201cIt is common for a student\u2026\u201d \u2014 contraction.",
+  "The programs belong to the school \u2014 possessive.",
+  "\u201cIt is usually a combination\u2026\u201d \u2014 contraction, and it opens the sentence, so it's capitalized.",
+  "The approach belongs to the school \u2014 possessive."
+];
+
+const passageSegments = [
+  "Teenagers today face a set of health challenges that would have seemed unfamiliar twenty years ago. Doctors say ",
+  " rare to meet a teenager who gets a full eight hours of sleep on a school night, and late-night phone scrolling is usually to blame \u2014 a habit that has ",
+  " own particular pull once a group chat gets going. Sleep isn't the only thing suffering. Nutritionists have noticed a shift in how teens eat, and ",
+  " fair to say fast food has replaced most home-cooked dinners in many households, so a number of schools have responded by updating ",
+  " cafeteria menus to include more balanced options. Mental health specialists describe a similar pattern with stress: ",
+  " common for a student juggling homework, sports, and a part-time job to feel constantly overwhelmed, which is why many schools have started training staff and revising ",
+  " counseling programs to catch burnout earlier. Experts agree that fixing one habit alone rarely solves the problem. ",
+  " usually a combination of better sleep, less screen time, and real institutional support that makes the difference \u2014 and when a school finally gets ",
+  " approach right, the results tend to show up fast, in grades, attendance, and overall mood."
+];
+
+function buildPassage() {
+  const el = document.getElementById('passageText');
+  let html = passageSegments[0];
+  for (let i = 0; i < PASSAGE_ANSWERS.length; i++) {
+    const cap = PASSAGE_CAP_FIRST[i];
+    const labelA = cap ? "It's" : "it's";
+    const labelB = cap ? "Its" : "its";
+    html += `<select class="pselect" data-i="${i}"><option value="">choose\u2026</option><option value="it's">${labelA}</option><option value="its">${labelB}</option></select>`;
+    html += passageSegments[i + 1];
+  }
+  el.innerHTML = html;
+}
+buildPassage();
+
+const passageState = new Array(PASSAGE_ANSWERS.length).fill(null);
+const passageBtn = document.getElementById('passageBtn');
+const passageHint = document.getElementById('passageHint');
+
+document.getElementById('passageText').addEventListener('change', (e) => {
+  const sel = e.target.closest('.pselect');
+  if (!sel) return;
+  const i = Number(sel.dataset.i);
+  passageState[i] = sel.value || null;
+  const answered = passageState.filter(s => s !== null).length;
+  passageHint.textContent = `${answered} / ${PASSAGE_ANSWERS.length} answered`;
+  passageBtn.disabled = answered !== PASSAGE_ANSWERS.length;
+});
+
+passageBtn.addEventListener('click', () => {
+  let score = 0;
+  const selects = document.querySelectorAll('.pselect');
+  const keyItems = [];
+  selects.forEach((sel, i) => {
+    const correct = passageState[i] === PASSAGE_ANSWERS[i];
+    sel.classList.remove('correct', 'incorrect');
+    sel.classList.add(correct ? 'correct' : 'incorrect');
+    if (correct) score++;
+    const ans = PASSAGE_ANSWERS[i];
+    const displayAns = PASSAGE_CAP_FIRST[i] ? ans.charAt(0).toUpperCase() + ans.slice(1) : ans;
+    keyItems.push(`<li>Blank ${i + 1}: <strong>${displayAns}</strong> \u2014 ${PASSAGE_EXPLAIN[i]}</li>`);
+  });
+
+  const passageResult = document.getElementById('passageResult');
+  document.getElementById('passageScoreText').textContent = `${score} / ${PASSAGE_ANSWERS.length}`;
+  document.getElementById('passageScoreNote').textContent = score === PASSAGE_ANSWERS.length
+    ? "Every blank correct \u2014 you can spot it's/its even buried in a paragraph."
+    : "Here's the full breakdown, blank by blank:";
+  const key = document.getElementById('passageKey');
+  key.innerHTML = `<ol>${keyItems.join('')}</ol>`;
+  key.classList.add('show');
+  passageResult.classList.add('show');
+  passageResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  passageBtn.textContent = 'Check the passage again';
+  finalScores.passage = score;
+  updateFinalSummary();
+});
+
+// --- Spot-the-errors task ---
+const ERROR_ITEMS = [
+  { word: "its",  isError: false, note: "Correct \u2014 the influence belongs to social media itself, not to the teenagers." },
+  { word: "its",  isError: false, note: "Correct \u2014 the users belong to the app." },
+  { word: "Its",  isError: true,  fix: "It's", note: "Should be \u201cIt's\u201d \u2014 it is easy to lose track of time, and it opens the sentence." },
+  { word: "its",  isError: true,  fix: "it's", note: "Should be \u201cit's\u201d \u2014 it is hard to put the phone down." },
+  { word: "its",  isError: true,  fix: "it's", note: "Should be \u201cit's\u201d \u2014 it has become normal." },
+  { word: "its",  isError: false, note: "Correct \u2014 the policy belongs to the school." },
+  { word: "its",  isError: true,  fix: "it's", note: "Should be \u201cit's\u201d \u2014 it is usually for a good reason." },
+  { word: "its",  isError: true,  fix: "it's", note: "Should be \u201cit's\u201d \u2014 it is harder to focus." },
+  { word: "it's", isError: false, note: "Correct \u2014 it has given teenagers new ways to connect." },
+  { word: "its",  isError: false, note: "Correct \u2014 the balance belongs to each family." }
+];
+
+const errorSegments = [
+  "Social media has become a constant part of teenage life, and researchers say ",
+  " influence on daily habits keeps growing. Every app competes for ",
+  " users' attention, and studies show many teens check their phones more than a hundred times a day. ",
+  " easy to lose track of time once the scrolling starts, and plenty of students admit that ",
+  " hard to put the phone down even during homework. A recent survey found that ",
+  " become normal for teens to sleep with a phone under the pillow, which only makes the problem worse. When a school limits ",
+  " phone policy, ",
+  " usually for a good reason \u2014 research shows that ",
+  " harder for students to focus once notifications start interrupting them. Even so, technology isn't all bad: ",
+  " also given teenagers new ways to stay in touch with friends and find support when they need it most. The key, most experts agree, is helping each family find ",
+  " own healthy balance."
+];
+
+function buildErrorsText() {
+  const el = document.getElementById('errorsText');
+  let html = errorSegments[0];
+  ERROR_ITEMS.forEach((item, i) => {
+    html += `<span class="flagword" data-i="${i}">${item.word}</span>`;
+    html += errorSegments[i + 1];
+  });
+  el.innerHTML = html;
+}
+buildErrorsText();
+
+const flagged = new Array(ERROR_ITEMS.length).fill(false);
+const errorsBtn = document.getElementById('errorsBtn');
+const errorsHint = document.getElementById('errorsHint');
+
+document.getElementById('errorsText').addEventListener('click', (e) => {
+  const span = e.target.closest('.flagword');
+  if (!span) return;
+  const i = Number(span.dataset.i);
+  flagged[i] = !flagged[i];
+  span.classList.toggle('flagged', flagged[i]);
+  span.classList.remove('tp', 'fp', 'fn', 'tn');
+  const count = flagged.filter(Boolean).length;
+  errorsHint.textContent = `${count} words flagged as incorrect`;
+});
+
+errorsBtn.addEventListener('click', () => {
+  let correctCount = 0;
+  const keyItems = [];
+  const spans = document.querySelectorAll('.flagword');
+  spans.forEach((span, i) => {
+    const item = ERROR_ITEMS[i];
+    span.classList.remove('flagged', 'tp', 'fp', 'fn', 'tn');
+    let cls;
+    if (item.isError && flagged[i]) { cls = 'tp'; correctCount++; }
+    else if (item.isError && !flagged[i]) { cls = 'fn'; }
+    else if (!item.isError && flagged[i]) { cls = 'fp'; }
+    else { cls = 'tn'; correctCount++; }
+    span.classList.add(cls);
+    if (item.isError) {
+      const status = flagged[i] ? 'You caught it.' : 'You missed this one.';
+      keyItems.push(`<li>\u201c${item.word}\u201d should be \u201c${item.fix}\u201d \u2014 ${item.note} <em>${status}</em></li>`);
+    } else if (flagged[i]) {
+      keyItems.push(`<li>\u201c${item.word}\u201d was actually correct \u2014 ${item.note} <em>You flagged it by mistake.</em></li>`);
+    }
+  });
+
+  const errorsResult = document.getElementById('errorsResult');
+  document.getElementById('errorsScoreText').textContent = `${correctCount} / ${ERROR_ITEMS.length}`;
+  document.getElementById('errorsScoreNote').textContent = correctCount === ERROR_ITEMS.length
+    ? "All 5 mistakes caught, and you didn't flag anything that was already correct."
+    : "Here's what you caught, missed, or flagged unnecessarily:";
+  const key = document.getElementById('errorsKey');
+  key.innerHTML = keyItems.length ? `<ol>${keyItems.join('')}</ol>` : '';
+  key.classList.add('show');
+  errorsResult.classList.add('show');
+  errorsResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  errorsBtn.textContent = 'Check my answers again';
+  finalScores.errors = correctCount;
+  updateFinalSummary();
+});
+</script>
+</body>
+</html>
